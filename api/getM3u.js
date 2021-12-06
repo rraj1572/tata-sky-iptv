@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
         sid: req.query.sid.split('_')[0],
         sName: req.query.sname,
         token: req.query.tkn,
-        ent: req.query.ent.split('_'),
+        ent: 1000000001,
         tsActive: req.query.sid.split('_')[1] === "D" ? false : true
     };
     if(uData.tsActive)
@@ -15,7 +15,8 @@ module.exports = async (req, res) => {
       res.send(m3uString);
     }
     else
-      res.status(409).json({error: "Tata Sky Deactivated"});
+      let m3uString = await generateM3u(uData);
+      res.send(m3uString);
 }
 
 const getAllChans = async () => {
